@@ -33,13 +33,19 @@
 ---
 
 ## 📁 폴더 구조
-📦 알고리즘-스터디
-┣ 📂 week1
-┃ ┣ 📂 kimssafy
-┃ ┃ ┗ 📝 boj_1234_문제이름.py
-┃ ┣ 📂 leessafy
-┃ ┃ ┗ 📝 pgm_4321_문제이름.java
-┗ 📜 README.md
+```📦 알고리즘-스터디/
+├── week1/
+│ ├── honggildong/
+│ │ └── boj_1234_숨바꼭질.py
+│ ├── janedoe/
+│ │ └── pgm_4321_모의고사.java
+│ └── ...
+├── week2/
+│ ├── honggildong/
+│ │ └── swea_5678_암호생성기.py
+│ └── ...
+└── README.md
+```
 
 ## 📝 커밋 규칙
 
