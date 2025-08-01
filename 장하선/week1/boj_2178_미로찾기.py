@@ -1,7 +1,7 @@
 n,m=map(int,input().split())
 maze=[[] for _ in range(n)]
 visited=[[0,0]]
-stack=[[0,0]]
+queue=[[0,0]]
 for i in range(n):
     k=input()
     for j in range(m):
@@ -11,19 +11,7 @@ for i in range(n):
 # 막다른 길인 경우, pop으로 해당 리스트 반환 후 백트래킹
 dx=[-1,1,0,0]
 dy=[0,0,-1,1]
-while stack:
-    x,y=map(int, stack[-1])
-    mv=False
-    for i in range(4):
-        nx=x+dx[i]
-        ny=y+dy[i]
-        if nx<0 or nx>=n or ny<0 or ny>=m:
-            continue
-        if maze[nx][ny]==1 and [nx, ny] not in visited:
-            stack.append([nx,ny])
-            visited.append([nx,ny])
-            mv=True
-            break
-    if not mv:
-        stack.pop()
-print(len(visited))
+while queue:
+    x,y=map(int, queue.pop())
+    
+print(len(queue))
