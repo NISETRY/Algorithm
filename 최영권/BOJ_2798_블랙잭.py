@@ -10,15 +10,6 @@ nums = list(map(int, input().split()))
 choose3 = []
 max_val = 0 
 
-for i in range(-1, -len(nums), -1):
-    second_nums = nums.pop(i)
-    i += 1
-    print(i, nums)
-#     for num2 in second_nums:
-#         third_nums = second_nums.pop(second_nums.index(num2))
-#         for num3 in third_nums:
-#             choose3.append(num1)
-#             choose3.append(num2)
-#             choose3.append(num3)
-
-# print(choose3)
+# 3장을 뽑는다
+# 1. 슬라이싱
+# 2. 빈복문
