@@ -61,7 +61,10 @@
 
 ❌ 정답판과 다른 갯수 구하는 문제인 줄 알았음
 
+# 8월 2일
+
+## BOJ 1018 체스판 다시 칠하기
+
+❌ 
+
 ### ➡ 이모지 출처 : https://www.webfx.com/tools/emoji-cheat-sheet/
-
-
-
