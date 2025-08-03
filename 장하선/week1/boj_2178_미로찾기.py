@@ -23,4 +23,5 @@ while queue:
                     queue.append((nx,ny))
                     visited[nx][ny]=True
                     maze[nx][ny]=maze[x][y]+1
+                    print(*queue)
 print(maze[n-1][m-1])
