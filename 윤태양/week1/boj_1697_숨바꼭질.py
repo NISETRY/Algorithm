@@ -1,3 +1,4 @@
+from collections import deque
 k, n = map(int, input().split())
 visited = []
 
@@ -12,25 +13,27 @@ def act(n):
 
 def bfs(n):
     visited.append(n)
-    que = [[n]]
+    que = deque()
+    que.append([n])
     
     while True:
-        a = que.pop(0)
+        a = que.popleft()
         last = a[-1]
         if last ==k:
+            print(a)
             return a
         move = act(last)
 
         for i in move:
-            if i not in visited:
-                visited.append(i)
-                temp = []
-                for j in range(len(a)):
-                    temp.append(a[j])
-                temp.append(i)
+            if i not in visited:  # O(n)
+                visited.append(i) # O(1)
+                temp = a.copy() # O(n)
+                temp.append(i)  # O(1)
                 que.append(temp)
-                
-print(len(bfs(n))-1)
+if k>=n:
+    print(k-n)
+else:
+    print(len(bfs(n))-1)
                                 
         
         
