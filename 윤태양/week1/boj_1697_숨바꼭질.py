@@ -1,6 +1,5 @@
 n, k = map(int, input().split())
 visited = []
-graph = []
 
 def act(n):
     move1 = 2*n
@@ -10,31 +9,26 @@ def act(n):
 
 def bfs(n):
     visited.append(n)
-    que = [n]
-    graph.append([n])
-    a = n
+    que = [[n]]
     
-    while a!=k:
+    while True:
         a = que.pop(0)
-        move = act(a)
-        
+        last = a[-1]
+        if last ==k:
+            return a
+        move = act(last)
+
         for i in move:
-            if a not in visited:
-                graph.append([i])
-                que.append(i)
+            if i not in visited:
                 visited.append(i)
+                temp = []
+                for j in range(len(a)):
+                    temp.append(a[j])
+                temp.append(i)
+                que.append(temp)
+                print(temp)
                 
-            elif a in visited:
-                for i in graph:
-                    try:
-                        idx = i.index(a)
-                    except:
-                        pass
-                graph[idx].append(i)
-                que.append(i)
-                visited.append(i)
-bfs(n)
-print(graph)
-                        
+print(len(bfs(n))-1)
+                                
         
         
