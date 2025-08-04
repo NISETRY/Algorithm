@@ -10,7 +10,6 @@ for i in range(n):
         maze[i].append(int(k[j]))
 dx=[-1,1,0,0]
 dy=[0,0,-1,1]
-sc=0
 while queue:
     x,y=queue.popleft()
     for i in range(4):
