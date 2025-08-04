@@ -9,8 +9,8 @@ while b==1:
     
     for i in str(a):
         num += int(i)**p
-        if num in n:
-            b=0
+    if num in n:
+        b=0
 
     n.append(num)
     a = num
