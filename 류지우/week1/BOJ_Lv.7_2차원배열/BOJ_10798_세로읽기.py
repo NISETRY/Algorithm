@@ -5,9 +5,15 @@ n = [list(input()) for _ in range (5)]
 # print(n)
 
 new = ''
-for r in range(5):
+for r in range(15):
     for c in range(5):
-        new += n[c][r]
+        # 인덱스가 없는 경우, 건너뛰기
+        if len(n[c]) > r:
+            # continue
+
+        # if n[c][r] is False:
+        #     continue
+            new += n[c][r]
 
 print(new)
 
