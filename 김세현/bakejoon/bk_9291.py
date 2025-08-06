@@ -1,50 +1,52 @@
-matrix = []
-for _ in range(9):
-    c = list(map(int, input().split()))
-    matrix.append(c)
+t = int(input())
 
-# for i in range(1, 8, 3):
-#     for j in range(1, 8, 3):
+for tc in range(t):
 
-#         a= (matrix[i][j], matrix[i-1][j], matrix[i+1][j],
-#             matrix[i][j+1], matrix[i-1][j+1], matrix[i][j+1],
-#             matrix[i][j-1], matrix[i-1][j-1], matrix[i+1][j-1] )
-        
-#     if set(a) == a:
-#         print("CORRECT")
-#     else:
-#         print("INCORRECT")
-#         break
+    matrix = []
+    for _ in range(9):
+        c = list(map(int, input().split()))
+        matrix.append(c)
 
-# m = [1, 2, 3, 5, 6, 7, 4, 8, 9]
+    result = []
 
-# if m == list(set(m)):
-#     print("CORRECT")
-# else:
-#     print("INCORRECT")
+    for i in range(1, 8, 3):
+        for j in range(1, 8, 3):
 
+            a= (matrix[i][j], matrix[i-1][j], matrix[i+1][j],
+                matrix[i][j+1], matrix[i-1][j+1], matrix[i+1][j+1],
+                matrix[i][j-1], matrix[i-1][j-1], matrix[i+1][j-1] )
+            
+            if len(set(a)) == 9:
+                result.append("CORRECT")
+            else:
+                result.append("INCORRECT")
+                break
 
+    
 
-# if len(set(m)) == 9:
-#     print("CORRECT")
-# else: 
-#     print("INCORRECT")
-# 1. 매 줄마다 set
-# 2. 
+    for i in range(len(matrix)):
+        if len(set(matrix[i])) == 9:
+            result.append("CORRECT")
+        else:
+            result.append("INCORRECT")
 
-f= []
+ 
 
-for i in range(len(matrix)):
-    for j in range(len(matrix)):
-        f.append(matrix[i][j])
+    f= []
 
-d = []
-for i in range(0, len(f), 9):
-    chunk = f[i:i+9]
-    d.append(set(chunk))
+    for col in range(9):
+        column = []
+        for row in range(9):
+            column.append(matrix[row][col])
+        if len(set(column)) == 9:
+            result.append("CORRECT")
+        else:
+            result.append("INCORRECT")
+            break
 
-    if len(set(d)) == 9:
-        print("CORRECT")
+    
+
+    if "INCORRECT" in result:
+        print( f'Case {tc+1}: INCORRECT')
     else:
-        print("INCORRECT")
-        break
+        print( f'Case {tc+1}: CORRECT')
