@@ -1,69 +1,48 @@
-import copy
+n, m = map(int,input().split())
+graph = [[0]*n for _ in range(n)]
+idx_c = [[0,0]]
+idx_h = []
+num_c = 0
 
-n, m = map(int, input().split())
-graph = [[0 for _ in range(n)] for _ in range(n)]
-chicken_num = 0
-chicken_idx = [[-1,-1]]
-for z in range(n):
+for q in range(n):                              # 인풋
     temp = list(map(int, input().split()))
-    for x in range(n):
-        graph[z][x] = temp[x]
-        if temp[x] == 2:
-            chicken_num+=1
-            chicken_idx.append([z,x])
-##### 인풋 ###########################################
-com = []
-com_chicken = []
-def comb(count, idx):
+    for p in range(n):
+        graph[q][p] = temp[p]
+
+        if temp[p] == 2:                        # 치킨집 위치 따로 저장
+            num_c+=1
+            idx_c.append([q,p])
+        
+        elif temp[p] == 1:                      # 집 위치 따로 저장
+            idx_h.append([q,p])
+
+combs = []
+temp = []
+def comb(count, idx):                           # 치킨집 조합
     if count == m:
-        com_chicken.append(com[:])
+        combs.append(temp[:])
         return
     
     else:
-        for i in range(1, chicken_num+1):
+        for i in range(1, num_c+1):
             if i > idx:
-                com.append(i)
+                temp.append(i)
                 comb(count+1, i)
-                com.pop()            
+                temp.pop()
 comb(0,0)
-##### 조합 ###########################################
-move = [[-1,0],[1,0],[0,1],[0,-1]]
+min_d = 10000000000
 
-def bfs(a,b): #bfs a,b 조건 -> 집 이어야 함
-    visited[a][b] = 1
-    que = [[a,b]]
-    while que:
-        a, b = que.pop(0)    # 종료조건
-        if new_graph[a][b] == 3:
-            break
+for i in combs:                               #치킨집 조합 경우의 수
+    dis = [10000]*len(idx_h)
+    for j in range(m):                            
+        c_x, c_y = idx_c[i[j]][0], idx_c[i[j]][1] # 경우의 수 -> 위치 변환
+ 
+        for k in range(len(idx_h)):
+            dis_ch = abs(c_x - idx_h[k][0]) + abs(c_y - idx_h[k][1]) # 집과 치킨집 거리 
+            dis[k] = min(dis[k], dis_ch)  # 최소거리 
         
-        for i, j in move:
-            x,y = a+i, b+j
-            if 0<=x<n and 0<=y<n:
-                if visited[x][y] == 0:
-                    que.append([x,y])
-                    visited[x][y] = visited[a][b] + 1 # 마지막에 1 빼줘야 함(아마도)
-                    
-    return visited[a][b]
-##### bfs ###########################################
-for i in range(len(com_chicken)):
-    com_chicken[i][0] = chicken_idx[com_chicken[i][0]]
-    com_chicken[i][1] = chicken_idx[com_chicken[i][1]]
-##### idx ###########################################
-ans = []
+        # print(f'{k:} {dis}')
+        min_d = min(sum(dis), min_d) 
 
-for i in range(len(com_chicken)):
-    c_idx = com_chicken[i]
+print(min_d)
     
-    for j in range(len(c_idx)):
-        new_graph = copy.deepcopy(graph)
-        new_graph[c_idx[j][0]][c_idx[j][1]] = 3
-
-for k in range(n):
-    for l in range(n):
-        if new_graph[k][l] == 1:
-            visited = [[0 for _ in range(n)] for _ in range(n)]
-            ans.append(bfs(k,l))
-
-print(min(ans))
-                
