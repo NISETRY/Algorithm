@@ -15,7 +15,6 @@ for w in range(1,max_val+1):
     safety_region=[[0 for _ in range(n)] for _ in range(n)]
     visited=[[0 for _ in range(n)] for _ in range(n)]
     safety=0
-    queue=deque()
     for i in range(n):
         for j in range(n):
             if region[i][j]>w:
@@ -27,19 +26,16 @@ for w in range(1,max_val+1):
         for y in range(n):
             if safety_region[x][y] and visited[x][y]==0:
                 safety+=1
+                queue=deque()
                 queue.append((x,y))
+                visited[x][y]=1
                 while queue:
+                    x,y=queue.popleft()
                     for i in range(4):
-                        queue.popleft()
                         nx,ny=x+dx[i],y+dy[i]
                         if 0<=nx<n and 0<=ny<n:
-                            if safety_region[nx][ny]:
+                            if safety_region[nx][ny] and visited[nx][ny]==0:
                                 visited[nx][ny]=1
-                                queue.append((x,y))
-                        else:
-                            break
-                    break
-                    # print(queue) # Debug
-    print(w, safety)
+                                queue.append((nx,ny))
     safety_max=max(safety_max, safety)
 print(safety_max)
