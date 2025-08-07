@@ -35,9 +35,10 @@ for test_case in range(1, T+1):
                     check[i] = 1
                     continue
                 box = False
-        break
-    ''' False가 나와도 마지막 반복문만 break 되고 나머지는 break 되지 않는다. '''
-
+                break
+            if box == False: break
+        if box == False: break
+    
 
     if False in [row, col, box]:
         answer = "INCORRECT"
