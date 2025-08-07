@@ -1,15 +1,19 @@
-# N과 M을 받아 
-# N개의 카드를 뽑아 합이 M과 가장 근접한 카드 3장의 합을 출력한다.
-
-
-# N과 M을 받아 N개의 카드를 뽑는다.
+# 블랙잭
 N, M = map(int, input().split())
+
 nums = list(map(int, input().split()))
+three_num = set()
+diff = []
+for idx in range(len(nums)):
+    three_num = set()
+    for jdx in range(idx+1, len(nums)):
+        three_num = set()
+        for kdx in range(jdx+1, len(nums)):
+            three_num = set()
+            three_num.add(nums[idx])
+            three_num.add(nums[jdx])
+            three_num.add(nums[kdx])
+            if sum(list(three_num)) <= M:
+                diff.append(sum(list(three_num)))
 
-# 카드 3장을 뽑아 그 값을 M과 비교하여 값을 출력
-choose3 = []
-max_val = 0 
-
-# 3장을 뽑는다
-# 1. 슬라이싱
-# 2. 빈복문
+print(sorted(diff)[-1])
