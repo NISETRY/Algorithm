@@ -57,6 +57,7 @@ for test_case in range(int(input())):
                 break
             else:
                 continue
+        if box == False : break
 
 
     print(f'#{test_case + 1} {(row and col and box) * 1}')
