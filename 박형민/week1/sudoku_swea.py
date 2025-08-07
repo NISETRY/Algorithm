@@ -61,4 +61,3 @@ for test_case in range(int(input())):
 
 
     print(f'#{test_case + 1} {(row and col and box) * 1}')
-    
