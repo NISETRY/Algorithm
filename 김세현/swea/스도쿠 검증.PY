@@ -1,25 +1,39 @@
-puzzle = []
+T = int(input())
 
-for _ in range(9):
-    row = list(map(int, input().split()))
-    puzzle.append(row)
+for tc in range(1, T+1):
+    puzzle = [list(map(int, input().split())) for _ in range(9)]
+    is_valid = True
 
-# 행 확인
-for row in puzzle:
-    if len(set(row)) != 9:
-        print("행 중복")
-        break
+    # 행 검사
+    for row in puzzle:
+        if len(set(row)) != 9:
+            is_valid = False
+            break
 
-# 열 확인
-for col in range(9):
-    column = []
-    for row in range(9):
-        column.append(puzzle[row][col])
+    # 열 검사
+    if is_valid:
+        for col in range(9):
+            column = [puzzle[row][col] for row in range(9)]
+            if len(set(column)) != 9:
+                is_valid = False
+                break
 
-    print(column)
+    # 3x3 검사
+    if is_valid:
+        for i in range(0, 9, 3):
+            for j in range(0, 9, 3):
+                block = []
+                for x in range(3):
+                    for y in range(3):
+                        block.append(puzzle[i+x][j+y])
+                if len(set(block)) != 9:
+                    is_valid = False
+                    break
+            if not is_valid:
+                break
 
-
-
-# 행 확인
-# 열 확인
-# 3X3 확인
+    # 최종 출력
+    if is_valid:
+        print(f'#{tc} 1')
+    else:
+        print(f'#{tc} 0')
