@@ -27,6 +27,3 @@ for tc in range(1, T+1):
                     count += 1
                 c_sum = 0
     print(f"#{tc} {count}")
-
-            # 세로합
-            # 전체합
