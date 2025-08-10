@@ -3,21 +3,22 @@ n,k=map(int,input().split())
 cnt=0
 visited=[0]*100001
 nums=deque([n]) # 앞 요소 제거
-loc=deque() # 현재 위치 후보 짬통
-def walk_1(n): # 걷기 1
-    return n-1
-def walk_2(n): # 걷기 2
-    return n+1
-def tp(n): # 텔포
-    return n*2
-while k not in loc:
+visited[n]=1
+while True:
     if n==k: # 같이 있으면 바로 찾으니 break
         break
-    if n>k: # 동생보다 수빈이가 앞에 있으면 뒤로 가는 거 말고 방법이 없음
+    elif n>k: # 동생보다 수빈이가 앞에 있으면 뒤로 가는 거 말고 방법이 없음
         cnt=n-k
         break
-    for _ in range(len(nums)): # 수빈아 뒤질래??
-        x=nums.popleft()
-
-    
+    else:
+        for _ in range(len(nums)):
+            x=nums.popleft()
+            if x==k:
+                print(cnt)
+                exit()
+            for s in [x-1,x+1,2*x]:
+                if 0<=s<=100000 and visited[s]==0:
+                    visited[s]=1
+                    nums.append(s)
+        cnt+=1
 print(cnt)
