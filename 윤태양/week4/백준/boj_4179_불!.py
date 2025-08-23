@@ -20,9 +20,9 @@ def bfs():
                 nx, ny = dx-x, dy-y
                 
                 if 0<=nx<n+2 and 0<=ny<m+2:
-                    if visited[nx][ny] == 1 and (graph[nx][ny] == '.' or graph[nx][ny] == 0):
+                    if visited[nx][ny] == 0 and graph[nx][ny] == '.' :
                         que.append((-nx,-ny))
-                        visited[nx][ny] = 1
+                        visited[nx][ny] = -1
 
     return 'IMPOSSIBLE'
 
@@ -36,17 +36,22 @@ for i in range(n):
     temp = list(input())
     for j in range(m):
         graph[i+1][j+1] = temp[j]
-
-
+        
 for x in range(n+2):
     for y in range(m+2):
         if graph[x][y] == 'F':
             fire.append((-x,-y))
             visited[x][y] = 1
 
+for x in range(n+2):
+    for y in range(m+2):
         if graph[x][y] == 'J':
             fire.append((x,y))
             visited[x][y] = 1
-
+            
 ans = bfs()
-print(ans-1)
+
+if ans == 'IMPOSSIBLE':
+    print(ans)
+else:
+    print(ans-1)
