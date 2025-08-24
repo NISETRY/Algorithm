@@ -1,10 +1,6 @@
 from collections import deque
 
-def bfs(a,b):
-    visited = [[0]*m for _ in range(n)]
-    visited[a][b] = 1
-    que = deque([(a,b)])
-
+def bfs():
     while que:
         x, y = que.popleft()
 
@@ -13,37 +9,36 @@ def bfs(a,b):
             if 0<=nx<n and 0<=ny<m:
                 if graph[nx][ny] == 0 and visited[nx][ny] == 0:
                     que.append((nx,ny))
-                    visited[nx][ny] = 1
-                    if counter[nx][ny] == 0:
-                        counter[nx][ny] = counter[x][y] + 1
-                                        
-                    else:
-                        counter[nx][ny] = min(counter[x][y]+1, counter[nx][ny])
+                    visited[nx][ny] = visited[x][y] + 1
 
 m, n = map(int, input().split())
 graph = [list(map(int, input().split())) for _ in range(n)]
 visited = [[0]*m for _ in range(n)]
-counter = [[0]*m for _ in range(n)]
 move = [[-1,0],[0,1],[0,-1],[1,0]]
+que = deque()
+ans = -1
+flag = False
 
 for i in range(n):
     for j in range(m):
         if graph[i][j] == 1:
-            bfs(i,j)
-cnt = 0
-tomato_wall = 0
-ans = -1
+            que.append((i,j))
+            visited[i][j] = 1
 
-for r in range(n):
-    for c in range(m):
-       ans = max(ans, counter[r][c])
-       if graph[r][c] == 1 or graph[r][c] == -1:
-           tomato_wall += 1
-       if counter[r][c] == 0:
-           cnt += 1
+        elif graph[i][j] == -1:
+            visited[i][j] = -1
+bfs()
 
-if cnt == tomato_wall:
-    print(ans)
+for r in visited:
+    if flag:
+        break
+    for c in r:
+        if c == 0:
+            ans = 0
+            flag = True
+            break
 
-else:
-    print(-1)
+        else:
+            ans = max(ans, c)
+
+print(ans-1)

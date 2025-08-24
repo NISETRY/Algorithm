@@ -1,4 +1,6 @@
 from collections import deque
+import sys
+input=sys.stdin.readline
 n,m=map(int,input().split())
 treasure=[list(input()) for _ in range(n)]
 res=0
