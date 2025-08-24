@@ -17,10 +17,17 @@ for tc in range(T):
                 break
 
             if stat[left] == stat[right]:
+<<<<<<< HEAD
                 # 0 <-> 1
                 stat[right] = 1 - stat[right]
                 stat[left] = 1 - stat[left]
             else:
                 break
 
+=======
+                # 0 <-> 1 을 바꿔야 함
+                stat[right] = 1 - stat[right]
+                stat[left] = 1 - stat[left]
+            
+>>>>>>> a29b2439cdd3ff779b66fe5c6a4f02e7936ecbc1
     print(f'#{tc+1}', *stat)
