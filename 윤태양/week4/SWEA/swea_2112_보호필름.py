@@ -1,44 +1,56 @@
-t = int(input())
+def test(graph):     
+    for i in range(w):
+        streak_zero = 0
+        streak_one = 0
+        is_streak = False
+        for j in range(d):
+            if graph[j][i] == 0:
+                streak_zero += 1
+                streak_one = 0
 
-temp = []
-combo = []
-def comb(count, idx):
-    combo.append(temp[:])
-    if count == d:
+            else:
+                streak_one += 1
+                streak_zero = 0
+
+            if streak_zero == k or streak_one == k:
+                is_streak = True
+                break
+
+        if not is_streak:
+            return 0
+        
+    return 1
+
+def dfs(count, idx):
+    global min_cnt
+    if count >= min_cnt:
         return
     
-    for i in range(1, d+1):
-        if i>idx:
-            temp.append(i-1)
-            comb(count+1, i)
-            temp.pop()
+    if test(graph):
+        min_cnt = count
+        return
     
-permu = [] 
+    for i in range(idx, d):
+        original = graph[i][:]
 
+        graph[i] = [0]*w
+        dfs(count+1, i+1)
+
+        graph[i] = [1]*w
+        dfs(count+1, i+1)
+
+        graph[i] = original
+
+
+t = int(input())
 for tc in range(t):
-    d,w,k = map(int, input().split()) # row,col,k
+    d,w,k = map(int, input().split())
     graph = [list(map(int, input().split())) for _ in range(d)]
+    min_cnt = float("inf")
 
-    comb(0,0)
-    pick = sorted(combo, key=len)
+    if test(graph):
+        print(f'#{tc+1} 0')
+        continue
 
-    for i in pick:
-        for r in range(d):
-            for c in range(w):
-                if r in i:
-                    graph[r][c] = 1
-        seri = []
-        for p in range(w):
-            for q in range(d):
-                if not seri and graph[p][q] == 0:
-                    seri.append(0,1)
-                    continue
-
-                if not seri and graph[p][q] == 1:
-                    seri.append(1,1)
-                    continue
-
-
-# not_pick도 처리해야하고...
-# 검사도 추가해야하고...
-# 시간도 챙겨야함
+    dfs(0,0)
+    print(f'#{tc+1} {min_cnt}')
