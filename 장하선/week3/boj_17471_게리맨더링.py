@@ -12,7 +12,6 @@ def dfs(gu):
         linked_nearby.append[i]
         dfs(i)
 
-
 from collections import deque
 
 n=int(input())
@@ -29,3 +28,4 @@ for i in range(n):
 for i in range(n):
     linked_nearby=[i]
     dfs(i)
+ddd
