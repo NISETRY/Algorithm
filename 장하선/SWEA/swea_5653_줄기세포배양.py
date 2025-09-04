@@ -3,6 +3,7 @@
 # 번식으로 생성된 세포는 즉시 번식 가능
 # 페트리 접시의 최대 크기만큼의 리스트를 미리 선언 : n+k//2-1, m+k//2-1 크기
 from collections import deque
+import heapq
 T=int(input())
 dx=[0,1,0,-1]
 dy=[1,0,-1,0]
