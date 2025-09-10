@@ -13,7 +13,6 @@ def charge(x1,y1,x2,y2):
             charge_b.append(i)
     charge_a.append(-1)
     charge_b.append(-1)
-
     realmax=-1
     charge_amount=(0,0)
     for a in charge_a:
@@ -40,7 +39,9 @@ for tc in range(1,T+1):
     xa,ya,xb,yb=0,0,9,9
     ap=[[] for _ in range(n)]
     for i in range(n):
-        ap[i]=tuple(map(int, input().split()))
+        x,y,ditance,power=map(int, input().split())
+        ap[i]=(y-1,x-1,ditance,power)
+    # print(ap)
     for i in range(t+1):
         nxa,nya,nxb,nyb=xa+dr[dir_a[i]],ya+dc[dir_a[i]],xb+dr[dir_b[i]],yb+dc[dir_b[i]]
         tmp1, tmp2=charge(nxa,nya,nxb,nyb)
