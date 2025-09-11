@@ -14,7 +14,7 @@ def check(film, D, W, K):
                 found = True
                 break
 
-        if not found:
+        if not found: # found == False
             return False
     return True
 
@@ -58,7 +58,7 @@ for tc in range(1, T+1):
     film = [list(map(int, input().split())) for _ in range(D)]
     answer = K
 
-    if check(film, D, W, K):
+    if check(film, D, W, K) == True:
         result = 0
     else:
         dfs(0, 0)
