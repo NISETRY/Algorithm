@@ -2,7 +2,10 @@ T = int(input())
 picked = []
 def comb(cnt, idx):
     global answer
-     
+    if sum(picked) == B:
+        answer = 0
+        return 
+
     if sum(picked) >= B:
         answer = min(answer, sum(picked) - B)  
  
