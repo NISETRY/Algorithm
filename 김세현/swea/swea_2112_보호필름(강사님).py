@@ -12,8 +12,8 @@ def test_films(films):
              
             if count >= K:
                 test_pass = True
-                break
-        if not test_pass:
+                break # False이 열이 나타나면 다음 열 검사 할 필요도 없이 종료 하시오
+        if not test_pass: 
             return False
     return True
  
