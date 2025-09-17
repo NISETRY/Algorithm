@@ -1,7 +1,6 @@
 # import sys
 # sys.stdin = open("input.txt")
 
-
 dy = [-1, 1, 0, 0]
 dx = [0, 0, -1, 1]
 
@@ -23,7 +22,6 @@ def recur(y, x, number):
         # 다음 위치로 이동
         recur(ny, nx, number + matrix[ny][nx])
 
-
 T = int(input())
 
 for tc in range(1, T + 1):
@@ -38,8 +36,5 @@ for tc in range(1, T + 1):
 
     print(f'#{tc} {len(result)}')
 
-
 matrix = [input().split() for _ in range(4)]
 result = set()
-
-
