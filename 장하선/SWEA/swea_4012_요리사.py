@@ -5,7 +5,7 @@ T=int(input())
 for tc in range(1,T+1):
     n=int(input())
     synergy=[list(map(int,input().split()))for _ in range(n)]
-    pick=[0 for i in range(n)]
+    pick=[0 for _ in range(n)]
     flavor1=[]
     flavor2=[]
     temp=[]
