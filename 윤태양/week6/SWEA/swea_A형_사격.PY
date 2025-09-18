@@ -48,7 +48,7 @@ for tc in range(t):
     graph = list(map(int, input().split()))
     answer = 0
     dfs(0,graph,0)
-    dp = {}
+    dp = {[]*n}
 
     print(f'#{tc+1} {answer}')
 
