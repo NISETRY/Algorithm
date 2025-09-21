@@ -1,3 +1,5 @@
+import sys
+sys.stdin=open('input.txt')
 # 2시간 재고 풀어보기
 # 생명력 x면 x시간동안 존버하구 x시간동안 번식함
 # 번식으로 생성된 세포는 즉시 번식 가능
@@ -23,15 +25,12 @@ for tc in range(1,T+1):
             if cells[i][j]!=0:
                 queue.append((mid_row-(m//2)+i, mid_col-(n//2)+j, cells[i][j]))
                 visited[mid_row-(m//2)+i][mid_col-(n//2)+j]=1
-    # for i in range(len(petry)):
-    #     print(petry[i])
     # 배양 시작
     # x+=1이 될때마다 liviing_petry의 data가 있는 영역의 숫자 감소
     # 그 부분의 원래 값의 절대값의 음수와 같아지는 경우 죽은 셀로 처리(-99)
     for x in range(k):
         for _ in range(len(queue)):
             x,y,life=queue.popleft()
-            # print(x,y,life)
             # 비활성 상태
             if life>0:
                 queue.append((x,y,life-1))
