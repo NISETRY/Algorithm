@@ -1,58 +1,51 @@
 from collections import deque
-import pprint
+import sys
+input = sys.stdin.readline
+
 N, M = map(int, input().split())
-arr = [list(input()) for _ in range(N)]
-si, sj = N, M
+grid = [list(input().strip()) for _ in range(N)]
 
-def find(graph):
-    global si, sj
-    for i in range(N):
-        for j in range(M):
-            if arr[i][j] == 'J':
-                si, sj = i, j
-            if arr[i][j] == 'F':
-                fire.append((i, j))
-    
+dr = (-1, 1, 0, 0)
+dc = (0, 0, -1, 1)
+
 fire = deque()
+jihun = deque()
+visited = [[0]*M for _ in range(N)]  # 지훈 방문만 기록
 
-dr = (0, 0, 1, -1)
-dc = (1, -1, 0, 0)
-def bfs(r, c, bull):
-    if r == 0 or r == N-1 or c == 0 or c == M-1:
-            return 1
-    q = deque()
-    q.append((r, c))
-    visited = [[0]*M for _ in range(N)]
-    visited[r][c] = 0
+for i in range(N):
+    for j in range(M):
+        if grid[i][j] == 'F':
+            fire.append((i, j))
+        elif grid[i][j] == 'J':
+            jihun.append((i, j))
+            visited[i][j] = 1
 
-    while q:
-        for _ in range(len(bull)):
-            fr, fc = bull.popleft()  
-            for d in range(4):
-                nfr, nfc = fr+dr[d], fc+dc[d]
-                if nfr<0 or nfr>=N or nfc<0 or nfc>=M:
-                    continue
-                if arr[nfr][nfc] != '#' and arr[nfr][nfc] != 'F':
-                    arr[nfr][nfc] = 'F'
-                bull.append((nfr, nfc))
-        
-        
-        for _ in range(len(q)):
-            sr, sc = q.popleft()
-            for d in range(4):
-                nr, nc = sr+dr[d], sc+dc[d]
-                if nr<0 or nr>=N or nc<0 or nc>=M:
-                    continue
-                if arr[nr][nc] == 'F' or arr[nr][nc] == '#' or visited[nr][nc]:
-                    continue
-            
-                if nr == 0 or nr == N-1 or nc == 0 or nc == M-1:
-                    visited[nr][nc] = visited[sr][sc] + 1
-                    return visited[nr][nc] + 1
-                q.append((nr, nc))
-                visited[nr][nc] = visited[sr][sc] + 1
-            
+def bfs():
+    time = 0
+    while jihun:
+        time += 1
+
+        # 1) 불 먼저 확산
+        for _ in range(len(fire)):
+            r, c = fire.popleft()
+            for k in range(4):
+                nr, nc = r + dr[k], c + dc[k]
+                if 0 <= nr < N and 0 <= nc < M and grid[nr][nc] == '.':
+                    grid[nr][nc] = 'F'
+                    fire.append((nr, nc))
+
+        # 2) 지훈 이동
+        for _ in range(len(jihun)):
+            r, c = jihun.popleft()
+            # 가장자리에 있으면 탈출 성공
+            if r == 0 or r == N-1 or c == 0 or c == M-1:
+                return time
+            for k in range(4):
+                nr, nc = r + dr[k], c + dc[k]
+                if 0 <= nr < N and 0 <= nc < M:
+                    if not visited[nr][nc] and grid[nr][nc] == '.':
+                        visited[nr][nc] = 1
+                        jihun.append((nr, nc))
     return "IMPOSSIBLE"
-    
-find(arr)
-print(bfs(si, sj, fire))
+
+print(bfs())
