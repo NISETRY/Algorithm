@@ -1,14 +1,61 @@
-def caesar_encrypt(plaintext: str, shift: int) -> str:
-    """
-    입력: 알파벳 대문자 문자열
-    shift: 밀어낼 칸 수 (양수 = 오른쪽, 음수 = 왼쪽)
-    """
-    result = []
-    s = shift % 26
-    for ch in plaintext:
-        new_code = (ord(ch) - ord('A') + s) % 26 + ord('A')
-        result.append(chr(new_code))
-    print(result)
-    return ''.join(result)
+# 중복순열
+numbers = [1,2,3,4,5] 
+M = 2 
+picked = [] 
+def dupli_perm(cnt): 
+    if cnt == M: 
+        print(picked) 
+        return 
+    for i in range(len(numbers)):
+        picked.append(numbers[i]) 
+        dupli_perm(cnt+1)
+        picked.pop() 
+dupli_perm(0) 
 
-print(caesar_encrypt('SRKKCVJJRWP', 9))
+
+# 순열
+numbers = [1,2,3,4,5]
+M = 2
+picked = [] 
+visited = [0] *len(numbers)
+def perm(cnt):
+    if cnt == M:
+        print(picked) 
+        return
+    for i in range(len(numbers)):
+        if not visited[i]:
+            visited[i] = 1 
+            picked.append(numbers[i]) 
+            perm(cnt+1) 
+            visited[i] = 0 
+            picked.pop() 
+perm(0) 
+
+
+numbers = [1,2,3,4,5] 
+M = 2 
+picked = [] 
+def comb(cnt, idx): 
+    if cnt == M: 
+        print(picked) 
+        return 
+    for i in range(idx, len(numbers)): 
+        picked.append(numbers[i]) 
+        comb(cnt+1, i+1) 
+        picked.pop() 
+comb(0, 0) 
+
+
+# 조합
+numbers = [1,2,3,4,5] 
+M = 2 
+picked = [] 
+def dupli_comb(cnt, idx): 
+    if cnt == M: 
+        print(picked) 
+        return 
+    for i in range(idx, len(numbers)):
+        picked.append(numbers[i]) 
+        dupli_comb(cnt+1, i) 
+        picked.pop() 
+dupli_comb(0, 0) 
