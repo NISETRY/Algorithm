@@ -7,4 +7,6 @@ for mask in range(1,1<<10):
             sub.append(str(i))
     nums.append(int(''.join(sub)))
 nums.sort()
+print(nums[:20])
+print(sub)
 print(nums[n] if n<1023 else -1)
