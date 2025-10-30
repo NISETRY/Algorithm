@@ -6,10 +6,10 @@ ans = 0
 
 for _ in range(4):
     a1, b1, a2, b2, a3, b3, a4, b4 = list(map(int, input().split()))
-    graph.append([[a1, b1 - 1], [a2, b2 - 1], [a3, b3 - 1], [a4, b4 - 1]])
+    graph.append([[a1, b1 - 1], [a2, b2 - 1], [a3, b3 - 1], [a4, b4 - 1]]) # 물고기 저장
 
 
-def swap(graph, shark_pos):
+def swap(graph, shark_pos): # 물고기 자리 바꾸기 로직
     for num in range(1, 17):
         found = False
         for r in range(4):
@@ -35,7 +35,7 @@ def swap(graph, shark_pos):
                 break
 
 
-def dfs(graph, x, y, point):
+def dfs(graph, x, y, point):  # 상어가 물고기 먹기 로직
     global ans
 
     if not (0 <= x < 4 and 0 <= y < 4):
@@ -43,16 +43,16 @@ def dfs(graph, x, y, point):
     if graph[x][y][0] <= 0:
         return
 
-    graph = copy.deepcopy(graph)
-    fish_num, di = graph[x][y]  
-    new_point = point + fish_num
-    ans = max(ans, new_point)
+    graph = copy.deepcopy(graph) # deep_copy로 한 이유: dfs끼리 다른 graph를 쓰게 하려고
+    fish_num, di = graph[x][y]   # point 구하기
+    new_point = point + fish_num # new_point로 한 이유: 다음 dfs에 누적값을 전달하려고
+    ans = max(ans, new_point) 
     graph[x][y][0] = 0  
 
     swap(graph, (x, y))  
 
-    for step in range(1, 4):
-        nx = x + move[di][0] * step
+    for step in range(1, 4): # 상어는 1,2,3칸 갈 수 있으므로 경우에 따라 dfs
+        nx = x + move[di][0] * step 
         ny = y + move[di][1] * step
         if 0 <= nx < 4 and 0 <= ny < 4 and graph[nx][ny][0] > 0:
             dfs(graph, nx, ny, new_point)
